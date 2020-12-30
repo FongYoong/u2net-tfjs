@@ -10,8 +10,8 @@
 #start-progress
 {
     appearance: none;
-	display: block;
-	width: 100%;
+	  display: block;
+	  width: 100%;
     height: 1rem;
 }
 #start-progress::-webkit-progress-bar {
@@ -22,7 +22,7 @@
 #start-progress::-webkit-progress-value {
     background: #06c;
     border-radius: 25px;
-	transition: width 1s ease-in-out;
+	  transition: width 1s ease-in-out;
 }
 
 #upload-container {

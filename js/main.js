@@ -9,6 +9,19 @@ const start_container = document.getElementById('start-container');
 const script_name = document.getElementById('script-name');
 const start_progress = document.getElementById('start-progress');
 
+// Terminate if WebGL texture size too small, common among mobile devices.
+let blank_canvas = document.getElementById('blank_canvas');
+let gl = blank_canvas.getContext('webgl');
+let max_tex_size = gl.getParameter(gl.MAX_TEXTURE_SIZE);
+let min_tex_size = 5431;
+console.log("MAX_TEXTURE_SIZE:", max_tex_size);
+
+if (max_tex_size < min_tex_size){
+    script_name.innerHTML = "GPU unsupported ☹: WebGL max texture size is " + max_tex_size + " < " + min_tex_size;
+    start_progress.value = 0;
+    throw Error("GPU unsupported!");
+}
+
 function load_script(url){
     let req = new XMLHttpRequest();
     script_name.innerHTML = "Loading " + url;

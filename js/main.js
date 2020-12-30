@@ -148,6 +148,7 @@ worker.addEventListener("message", (event) => {
             upload_button_label.style.display = "initial";
             predict_button.style.display = "initial";
             main_container.style.display = "initial";
+            output_canvas.scrollIntoView({behavior: 'smooth'});
         });
     }
     

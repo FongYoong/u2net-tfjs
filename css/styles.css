@@ -1,11 +1,59 @@
-#start-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    width: 100%;
+.vertical-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
 }
-  
+/*Add margin to children*/
+.vertical-container > * {
+  margin: 1%;
+}
+
+.horizontal-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  width: 100%;
+}
+/*Add margin to children*/
+.horizontal-container > * {
+  margin: 1%;
+}
+
+img, canvas{
+  /*
+  max-height: 30%;
+  max-width: 30%;
+  border: black 1px solid;
+  */
+}
+
+/*Floating button, adapted from https://codepen.io/androidcss/pen/yOopGp*/
+.float-right{
+	position:fixed;
+	width:5em;
+	height:5em;
+	bottom:10em;
+	right:10em;
+	text-align:center;
+}
+.float-right > img {
+  max-width: 9em;
+  max-height: 9em;
+  border-radius:9em;
+  box-shadow: 0em 0em 1em #999;
+  margin: 5em;
+  -webkit-transition: margin 0.5s ease-out;
+  -moz-transition: margin 0.5s ease-out;
+  -o-transition: margin 0.5s ease-out;
+}
+.float-right > img:hover {
+	cursor:pointer;
+    margin-top: 3em;
+}
+
 /*Progress bar: https://stackoverflow.com/questions/44333316/pure-css-html5-progress-element-animation*/
 #start-progress
 {
@@ -23,50 +71,6 @@
     background: #06c;
     border-radius: 25px;
 	  transition: width 1s ease-in-out;
-}
-
-#upload-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    width: 100%;
-}
-/*Add margin to children*/
-#upload-container > * {
-    margin: 1%;
-}
-
-#main-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    width: 100%;
-}
-/*Add margin to children*/
-#main-container > * {
-    margin: 1%;
-}
-
-.horizontal-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
-    width: 100%;
-}
-/*Add margin to children*/
-.horizontal-container > * {
-    margin: 1%;
-}
-
-img, canvas{
-    /*
-    max-height: 30%;
-    max-width: 30%;
-    border: black 1px solid;
-    */
 }
 
 /* Button styling */

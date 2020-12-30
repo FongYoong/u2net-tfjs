@@ -1,0 +1,1 @@
+* This folder contains the Tensorflow.js variant (SavedModel) of the U²Net model obtained.

@@ -31,10 +31,10 @@
 ## 3. Tensorflow's SavedModel to Tensorflow.js
 * Based on [this](https://www.tensorflow.org/js/guide/conversion) and especially [this](https://www.tensorflow.org/js/tutorials/conversion/import_saved_model).
 * Tested with `tensorflowjs=2.8.1`
-i. Open a terminal and `cd` into the `export` folder.
-ii. Run the line below to obtain the Tensorflow.js model:
+    1. Open a terminal and `cd` into the `export` folder.
+    2. Run the line below to obtain the Tensorflow.js model:
 `tensorflowjs_converter --input_format=tf_saved_model exported/tfmodel exported/tfjs`
-iii. The model's folder name is `tfjs` by default. It can be loaded by TF.js on the browser as described [here](https://www.tensorflow.org/js/guide/save_load).
+    3. The model's folder name is `tfjs` by default. It can be loaded by TF.js on the browser as described [here](https://www.tensorflow.org/js/guide/save_load).
 
 ***
 

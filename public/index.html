@@ -1,0 +1,103 @@
+<html>
+  <head>
+    <link href="css/styles.css" rel="stylesheet" type="text/css" />
+    
+  </head>
+
+  <body>
+    <div id="start-container">
+      <p id="script-name" class="loading">Loading</p>
+      <progress id="start-progress" value="0" max="100"></progress>
+    </div>
+    <div id="upload-container">
+      <div class="horizontal-container">
+        <p id="tf_backend"></p>
+      </div>
+      <hr>
+      <div class="horizontal-container">
+        <label id="upload_button_label" for="upload_button" class="learn-more">
+          Choose Image
+        </label>
+        <input type="file" id="upload_button" name="upload_button" accept="image/*" style="display: none;">
+      </div>
+      <div class="horizontal-container">
+        <button id="predict_button" class="learn-more" type="button">Predict!</button>
+        <p id="predict_progress" class="loading">Predicting</p>
+      </div>
+      <div class="horizontal-container">
+        <img id='original_canvas' class=""></img>
+      </div>
+    </div>
+    <div id="main-container">
+      <div class="horizontal-container">
+        <p>Resized:</p>
+        <canvas id='resized_canvas' class=""></canvas>
+      </div>
+      <div class="horizontal-container">
+        <p>Mask:</p>
+        <canvas id='mask_canvas' class=""></canvas>
+      </div>
+      <div class="horizontal-container">
+        <p>Trimmed mask:</p>
+        <canvas id='mask2_canvas' class=""></canvas>
+      </div>
+      <div class="horizontal-container">
+        <p>Output:</p>
+        <canvas id='output_canvas' class=""></canvas>
+      </div>
+
+    </div>
+
+    <script id="worker1" type="javascript/worker">
+      
+      //importScripts("tf.min.js");
+      let url;
+      let model;
+      self.addEventListener("message", function(e) {
+          // the passed-in data is available via e.data
+          if (e.data.type == "load_scripts") {
+            url = e.data.url.href;
+            var index = url.indexOf('index.html');
+            if (index != -1) {
+              url = url.substring(0, index);
+            }
+            importScripts(url + 'js/tf.min.js');
+          }
+          else if(e.data.type == "load_model"){
+              tf.enableProdMode();
+              model = tf.loadGraphModel(url + 'tfjs/model.json', {onProgress:function(progress){
+                  self.postMessage({type:"load_progress", progress: progress * 100});
+              }});
+              model.then((res)=>{
+                  model = res;
+                  // Warmup model for faster inference later on
+                  const warmupResult = model.predict(tf.zeros([1, 3, 320, 320]));
+                  warmupResult.forEach((i)=>i.dataSync());
+                  warmupResult.forEach((i)=>i.dispose());
+                  self.postMessage({type:"load_model_done", backend:tf.getBackend()});
+              });
+          }
+          else if (e.data.type == "predict"){
+              let finalInput = e.data.finalInput;
+              finalInput = tf.tensor(finalInput);
+              console.log("Predict!");
+              const predictions = model.predict(finalInput);
+              console.log("Done!");
+              self.postMessage({type:"predict_done", prediction: predictions[0].arraySync()});
+              predictions.forEach(function(p, i){
+                if(i != 0){
+                  p.dispose();
+                }
+              });
+          }
+      }, false);
+    
+    </script>
+    <script src="js/main.js"></script>
+    <!--
+    <script src="js/tf.min.js"></script>
+    <script src="js/opencv/3.3.1/opencv.js"></script>
+    -->
+    
+  </body>
+</html>

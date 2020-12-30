@@ -9,7 +9,7 @@
 ***
 
 * A simple attempt to run [U²Net](https://github.com/NathanUA/U-2-Net) on the browser with Tensorflow.js
-* A demo can be found [here]().
+* A demo can be found [here](https://fongyoong.github.io/u2net-tfjs/).
 
 ***
 

@@ -1,15 +1,17 @@
 <html>
   <head>
     <link href="css/styles.css" rel="stylesheet" type="text/css" />
-    
   </head>
 
   <body>
-    <div id="start-container">
+    <a href="https://github.com/FongYoong/u2net-tfjs" target="_blank" class="float-right">
+      <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png">
+    </a>
+    <div id="start-container" class="vertical-container">
       <p id="script-name" class="loading">Loading</p>
       <progress id="start-progress" value="0" max="100"></progress>
     </div>
-    <div id="upload-container">
+    <div id="upload-container" class="vertical-container">
       <div class="horizontal-container">
         <p id="tf_backend"></p>
       </div>
@@ -28,7 +30,7 @@
         <img id='original_canvas' class=""></img>
       </div>
     </div>
-    <div id="main-container">
+    <div id="main-container" class="vertical-container">
       <div class="horizontal-container">
         <p>Resized:</p>
         <canvas id='resized_canvas' class=""></canvas>
